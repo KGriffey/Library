@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    <div id="header"></div>
-    <div id="bookshelf"></div>
+    <header class="header">HEADER</header>
     <div class="overlay" id="addBookOverlay">
         <form class="form" id="addBookForm">
             <div class="form-title">Information</div>
@@ -25,10 +24,13 @@
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
+    <div class="main">
+        <div id="addBookBtn">
+            <button>Add Book</button>
+        </div>
+        <div id="books"></div>
     </div>
-    </div>
-    <button onclick="overlayOn()">Add Book</button>
-    <div id="footer"></div>
+    <footer class="footer">FOOTER</footer>
     <script src="js/script.js"></script>
 </body>
 

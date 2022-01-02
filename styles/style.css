@@ -4,19 +4,22 @@
     box-sizing: border-box;
 }
 
-/*
-#header {
+.header {
     display: flex;
+    justify-content: center;
 }
 
-#footer {
+.footer {
     display: flex;
+    justify-content: center;
 }
 
-#bookshelf { 
+.main {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-*/
 
 .overlay {
     position: fixed; /* Sit on top of page content */
@@ -25,7 +28,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
     z-index: 2; /* Specify stack order */
 }
 
@@ -61,4 +64,21 @@ input[type=text] {
 input[type=submit] {
     font-size: 30px;
     padding: 12px 20px;
+}
+
+#books {
+    display: flex;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    border: solid black 2px;
+    width: 200px;
+    padding: 20px;
 }
