@@ -10,27 +10,26 @@
 </head>
 
 <body>
-    <header class="header">HEADER</header>
-    <div class="overlay" id="addBookOverlay">
-        <form class="form" id="addBookForm">
-            <div class="form-title">Information</div>
-            <input type="text" id="title" name="title" placeholder="Title...">
-            <input type="text" id="author" name="author" placeholder="Author...">
-            <input type="text" id="pages" name="pages" placeholder="Number of pages...">
-            <div class="form-checkbox">
-                <input type="checkbox" id="isRead" name="isRead">
+    <header class="header">Header</header>
+    <div class="modal-background">
+        <div class="modal" id="addBookModal">
+            <h2 class="title">Add book:</h2>
+            <input type="text" name="title" placeholder="Title...">
+            <input type="text" name="author" placeholder="Author...">
+            <input type="text" name="pages" placeholder="Number of pages...">
+            <div class="checkbox">
+                <input type="checkbox" name="isRead">
                 <label for="isRead">Read?</label>
             </div>
-            <input type="submit" name="submit" value="Submit">
-        </form>
+            <button class="submit">Submit</button>
+            <div class="modal-exit">X</div>
+        </div>
     </div>
     <div class="main">
-        <div id="addBookBtn">
-            <button>Add Book</button>
-        </div>
+        <button id="addBookBtn">Add Book</button>
         <div id="books"></div>
     </div>
-    <footer class="footer">FOOTER</footer>
+    <footer class="footer">Footer</footer>
     <script src="js/script.js"></script>
 </body>
 
