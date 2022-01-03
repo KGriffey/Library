@@ -119,8 +119,15 @@ modalExitBtn.addEventListener("click", function() {
     modalBackground.classList.remove("modal-background--active");
 });
 
-addBookBtn.addEventListener("click", function() {
+addBookBtn.addEventListener("click", function(e) {
     modalBackground.classList.add("modal-background--active");
+    e.stopPropagation(); //Needed to prevent bubbling and immediately closing the modal
+});
+
+document.addEventListener("click", function(e) {
+    if(!e.target.closest(".modal")){
+        modalBackground.classList.remove("modal-background--active");
+    }
 });
 
 modalSubmitBtn.addEventListener("click", updateLibrary);
