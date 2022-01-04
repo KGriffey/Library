@@ -61,6 +61,7 @@ button {
 
 .modal {
     flex: 0 1 30%;
+    min-width: 25rem;
     aspect-ratio: 1;
     padding: 1.5rem;
     font-size: 1.5rem;
@@ -83,6 +84,7 @@ input[type=text] {
 
 .checkbox {
     display: flex;
+    align-items: center;
     gap: 0.75rem;
 }
 
@@ -105,7 +107,7 @@ input[type=text] {
     position: absolute;
     top: 0.625rem;
     right: 0.625rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
 }
