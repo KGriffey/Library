@@ -27,7 +27,7 @@ function Book(title, author, pages, isRead) {
     this.pages = pages;
     this.isRead = isRead;
 
-    this.toggleIsRead = function() {
+    this.toggleIsRead = function () {
         this.isRead = !this.isRead;
     }
 }
@@ -48,33 +48,36 @@ function displayLibrary() {
 
         const title = document.createElement("div");
         title.textContent = book.title;
-        title.setAttribute("class", "info");
+        title.setAttribute("class", "title");
         bookCard.appendChild(title);
 
         const author = document.createElement("div");
         author.textContent = book.author;
-        author.setAttribute("class", "info");
+        author.setAttribute("class", "author");
         bookCard.appendChild(author);
 
         const pages = document.createElement("div");
-        pages.textContent = book.pages;
-        pages.setAttribute("class", "info");
+        pages.textContent = `${book.pages} pages`;
+        pages.setAttribute("class", "pages");
         bookCard.appendChild(pages);
 
-        const isRead = document.createElement("div");
-        isRead.textContent = book.isRead;
-        isRead.setAttribute("class", "info");
-        bookCard.appendChild(isRead);
+        const isReadToggleBtn = document.createElement("button");
+        if (book.isRead == true) {
+            isReadToggleBtn.textContent = "Read";
+            isReadToggleBtn.style.backgroundColor = "#47D147"
+        } else {
+            isReadToggleBtn.textContent = "Not Read";
+            isReadToggleBtn.style.backgroundColor = "#FF4D4D"
+        }
+        isReadToggleBtn.setAttribute("class", "isReadToggleBtn");
 
+        bookCard.appendChild(isReadToggleBtn);
         const removeBookBtn = document.createElement("button");
         removeBookBtn.textContent = "Remove";
         removeBookBtn.setAttribute("class", "removeBookBtn");
         bookCard.appendChild(removeBookBtn);
 
-        const isReadToggleBtn = document.createElement("button");
-        isReadToggleBtn.textContent = "Read";
-        isReadToggleBtn.setAttribute("class", "isReadToggleBtn");
-        bookCard.appendChild(isReadToggleBtn);
+
 
         books.appendChild(bookCard);
     });
@@ -88,7 +91,7 @@ function displayLibrary() {
     });
 
     isReadToggleBtns.forEach(button => {
-        button.addEventListener("click", toggleReadStatus);
+        button.addEventListener("click", toggleBookRead);
     });
 }
 
@@ -150,13 +153,24 @@ function removeBook() {
     displayLibrary();
 }
 
-function toggleReadStatus() {
+function toggleBookRead() {
     //Get the index of the book and toggle the read status
     const bookIndex = this.parentElement.getAttribute("data-library-index");
     userLibrary.Collection[bookIndex].toggleIsRead();
 
     //Redisplay the library
     displayLibrary();
+}
+
+function setLibraryCollection() {
+    //Retrieve user collection from local storage if available
+    const userCollection = JSON.parse(window.localStorage.getItem("collection")).Collection;
+    if (userCollection != null) {
+        for (let i = 0; i < userCollection.length; i++) {
+            const currBook = new Book(userCollection[i].title, userCollection[i].author, userCollection[i].pages, userCollection[i].isRead);
+            userLibrary.addBook(currBook);
+        }
+    }
 }
 
 //Static buttons and event listeners
@@ -182,6 +196,15 @@ document.addEventListener("click", function (e) {
 
 modalSubmitBtn.addEventListener("click", addBook);
 
+//Update localsotrage on end of user session
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') {
+        window.localStorage.setItem("collection", JSON.stringify(userLibrary));
+    }
+});
 
-// Test Code //
+// Main //
+// Get user's Library or create one if it doesn't exist  //
 let userLibrary = new Library();
+setLibraryCollection();
+displayLibrary();
