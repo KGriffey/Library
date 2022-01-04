@@ -147,7 +147,7 @@ function isBookInfoValid(bookInfo) {
 function removeBook() {
     //Get the index of the book and remove it
     const bookIndex = this.parentElement.getAttribute("data-library-index");
-    userLibrary.removeBook();
+    userLibrary.removeBook(bookIndex);
 
     //Redisplay the library
     displayLibrary();
