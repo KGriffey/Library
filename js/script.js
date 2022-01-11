@@ -1,19 +1,21 @@
-/* Library and Book Object/Methods */
-function Library() {
-    this.Collection = [];
+class Library {
+    constructor() {
+        this.collection = [];
+    }
+    
 
-    this.addBook = function (Book) {
-        this.Collection.push(Book);
+    addBook(Book) {
+        this.collection.push(Book);
     }
 
-    this.removeBook = function (index) {
-        this.Collection.splice(index, 1);
+    removeBook(index) {
+        this.collection.splice(index, 1);
     }
 
-    this.hasBook = function (title, author) {
-        for (let i = 0; i < this.Collection.length; i++) {
-            if (this.Collection[i].title.toLowerCase() == title.toLowerCase()
-                && this.Collection[i].author.toLowerCase() == author.toLowerCase()) {
+    hasBook(title, author) {
+        for (let i = 0; i < this.collection.length; i++) {
+            if (this.collection[i].title.toLowerCase() == title.toLowerCase()
+                && this.collection[i].author.toLowerCase() == author.toLowerCase()) {
                 return true;
             }
         }
@@ -21,13 +23,15 @@ function Library() {
     }
 }
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
 
-    this.toggleIsRead = function () {
+    toggleIsRead() {
         this.isRead = !this.isRead;
     }
 }
@@ -41,7 +45,7 @@ function displayLibrary() {
     }
 
     //Update the display with all current books in the library
-    userLibrary.Collection.forEach((book, index) => {
+    userLibrary.collection.forEach((book, index) => {
         const bookCard = document.createElement("div");
         bookCard.setAttribute("class", "book");
         bookCard.setAttribute("data-library-index", index);
@@ -156,7 +160,7 @@ function removeBook() {
 function toggleBookRead() {
     //Get the index of the book and toggle the read status
     const bookIndex = this.parentElement.getAttribute("data-library-index");
-    userLibrary.Collection[bookIndex].toggleIsRead();
+    userLibrary.collection[bookIndex].toggleIsRead();
 
     //Redisplay the library
     displayLibrary();
@@ -164,7 +168,7 @@ function toggleBookRead() {
 
 function setLibraryCollection() {
     //Retrieve user collection from local storage if available
-    const userCollection = JSON.parse(window.localStorage.getItem("collection")).Collection;
+    const userCollection = JSON.parse(window.localStorage.getItem("collection")).collection;
     if (userCollection != null) {
         for (let i = 0; i < userCollection.length; i++) {
             const currBook = new Book(userCollection[i].title, userCollection[i].author, userCollection[i].pages, userCollection[i].isRead);
